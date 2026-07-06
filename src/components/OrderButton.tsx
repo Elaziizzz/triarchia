@@ -3,9 +3,9 @@
 import { useState } from 'react';
 
 type Variant = {
-  id: string;
-  size: string;
-  color: string;
+  id: number;
+  size: string | null;
+  color: string | null;
   additional_price: number | string | null;
 };
 
