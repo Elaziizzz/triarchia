@@ -1,26 +1,54 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-brand-primary: #050505;
+  --color-brand-secondary: #101010;
+  --color-brand-card: #161616;
+  --color-neon-green: #39FF14;
+  --color-neon-purple: #A020F0;
+  --color-text-primary: #ffffff;
+  --color-text-muted: #aaaaaa;
+
+  --font-sans: 'Outfit', system-ui, sans-serif;
+  
+  --animate-glow: glow 2s ease-in-out infinite alternate;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #39FF14, 0 0 20px #39FF14, 0 0 30px #39FF14;
+  }
+  to {
+    text-shadow: 0 0 20px #39FF14, 0 0 30px #39FF14, 0 0 40px #39FF14;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  body {
+    background-color: var(--color-brand-primary);
+    color: var(--color-text-primary);
+  }
+}
+
+@layer components {
+  .btn-neon {
+    @apply relative inline-flex items-center justify-center px-6 py-3 font-semibold text-white bg-transparent border-2 border-[var(--color-neon-purple)] rounded hover:bg-[var(--color-neon-purple)] transition-all duration-300 overflow-hidden z-10;
+  }
+  
+  .btn-neon::before {
+    content: '';
+    @apply absolute top-0 left-[-100%] w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-all duration-500 z-[-1];
+  }
+  
+  .btn-neon:hover::before {
+    @apply left-[100%];
+  }
+
+  .text-neon {
+    @apply font-bold text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-neon-green)] to-[var(--color-neon-purple)];
+  }
+
+  .card-luxury {
+    @apply bg-[var(--color-brand-card)] border border-gray-800 rounded-lg overflow-hidden transition-all duration-300 hover:border-[var(--color-neon-purple)] hover:shadow-[0_0_15px_rgba(160,32,240,0.3)];
+  }
 }
