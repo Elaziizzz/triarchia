@@ -26,8 +26,8 @@ export async function createCategory(formData: FormData) {
         slug: slugify(name),
       }
     });
-  } catch (error) {
-    return { error: "Failed to create category" };
+  } catch (error: any) {
+    return { error: `Failed to create category: ${error.message || error}` };
   }
 
   revalidatePath('/admin/categories');
@@ -72,8 +72,8 @@ export async function createProduct(formData: FormData, imageUrls: string[]) {
       await Promise.all(imagePromises);
     }
     
-  } catch (error) {
-    return { error: "Failed to create product" };
+  } catch (error: any) {
+    return { error: `Failed to create product: ${error.message || error}` };
   }
 
   revalidatePath('/admin/products');
