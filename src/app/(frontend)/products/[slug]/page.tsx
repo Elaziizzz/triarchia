@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import OrderButton from "@/components/OrderButton";
 
-export const dynamic = 'force-dynamic';
+
 
 export default async function ProductDetailPage({ params }: { params: { slug: string } }) {
   const { slug } = await params;

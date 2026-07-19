@@ -30,7 +30,7 @@ export async function createCategory(formData: FormData) {
     return { error: `Failed to create category: ${error.message || error}` };
   }
 
-  revalidatePath('/admin/categories');
+  revalidatePath('/', 'layout');
   redirect('/admin/categories');
 }
 
@@ -76,7 +76,6 @@ export async function createProduct(formData: FormData, imageUrls: string[]) {
     return { error: `Failed to create product: ${error.message || error}` };
   }
 
-  revalidatePath('/admin/products');
-  revalidatePath('/products');
+  revalidatePath('/', 'layout');
   redirect('/admin/products');
 }
