@@ -9,12 +9,12 @@ type Variant = {
   additional_price: number | string | null;
 };
 
-export default function OrderButton({ 
-  productName, 
-  price, 
-  variants, 
-  adminPhone 
-}: { 
+export default function OrderButton({
+  productName,
+  price,
+  variants,
+  adminPhone
+}: {
   productName: string;
   price: number;
   variants: Variant[];
@@ -32,9 +32,9 @@ export default function OrderButton({
         finalPrice += Number(selectedVariant.additional_price);
       }
     }
-    
+
     message += `\nHarga: Rp ${finalPrice.toLocaleString('id-ID')}\n\nApakah stoknya masih ada?`;
-    
+
     const waUrl = `https://wa.me/${adminPhone}?text=${encodeURIComponent(message)}`;
     window.open(waUrl, '_blank');
   };
@@ -46,14 +46,13 @@ export default function OrderButton({
           <h4 className="text-sm font-semibold text-white uppercase tracking-wider mb-3">Pilih Varian</h4>
           <div className="flex flex-wrap gap-3">
             {variants.map((v) => (
-              <button 
-                key={v.id} 
+              <button
+                key={v.id}
                 onClick={() => setSelectedVariant(v)}
-                className={`px-4 py-2 border rounded text-sm transition-colors ${
-                  selectedVariant?.id === v.id 
-                    ? 'border-neon-green text-neon-green bg-neon-green/10' 
+                className={`px-4 py-2 border rounded text-sm transition-colors ${selectedVariant?.id === v.id
+                    ? 'border-neon-green text-neon-green bg-neon-green/10'
                     : 'border-gray-700 text-text-muted hover:border-neon-purple hover:text-white'
-                }`}
+                  }`}
               >
                 {v.color} - {v.size} {v.additional_price && Number(v.additional_price) > 0 ? `(+Rp ${Number(v.additional_price).toLocaleString('id-ID')})` : ''}
               </button>
@@ -61,7 +60,7 @@ export default function OrderButton({
           </div>
         </div>
       )}
-      
+
       <div className="flex gap-4">
         <button onClick={handleOrder} className="btn-neon w-full py-4 text-lg">
           PESAN VIA WHATSAPP

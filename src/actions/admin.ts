@@ -27,6 +27,9 @@ export async function createCategory(formData: FormData) {
       }
     });
   } catch (error: any) {
+    if (error?.code === 'P2002') {
+      return { error: `Kategori "${name}" sudah ada (duplikat). Silakan gunakan nama lain.` };
+    }
     return { error: `Failed to create category: ${error.message || error}` };
   }
 
