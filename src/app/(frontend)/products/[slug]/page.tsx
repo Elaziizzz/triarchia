@@ -2,9 +2,12 @@ import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import OrderButton from "@/components/OrderButton";
-
-
-
+export async function generateStaticParams() {
+  const products = await prisma.product.findMany({ select: { slug: true } });
+  return products.map((product) => ({
+    slug: product.slug,
+  }));
+}
 export default async function ProductDetailPage({ params }: { params: { slug: string } }) {
   const { slug } = await params;
   
